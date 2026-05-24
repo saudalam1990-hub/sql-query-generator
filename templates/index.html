@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Query Generator</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>SQL QUERY GENERATOR</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <input type="text"
+        name="table"
+        placeholder="Enter Table Name"
+        required>
+
+        <script>
+
+function copyQuery(){
+
+    let text =
+    document.querySelector(".output textarea");
+
+    text.select();
+
+    document.execCommand("copy");
+
+    alert("Query Copied!");
+
+}
+
+</script>
+
+        <input type="text"
+        name="columns"
+        placeholder="Columns">
+        <textarea
+name="excel_data"
+placeholder="Paste Excel Data Here"></textarea>
+<input type="file" name="file">
+
+        <textarea
+        name="values"
+        placeholder="Values / SET Part"></textarea>
+<textarea
+name="datatype"
+placeholder="Enter Data Types Example:
+
+INT
+VARCHAR(100)
+DATE
+FLOAT
+BOOLEAN"></textarea>
+
+        <input type="text"
+        name="condition"
+        placeholder="WHERE Condition">
+
+        <div class="button-group">
+
+    <button type="submit"
+    name="action"
+    value="INSERT"
+    class="insert-btn">
+        INSERT
+    </button>
+
+    <button type="submit"
+    name="action"
+    value="UPDATE"
+    class="update-btn">
+        UPDATE
+    </button>
+
+    <button type="submit"
+    name="action"
+    value="DELETE"
+    class="delete-btn">
+        DELETE
+    </button>
+
+    <button type="submit"
+    name="action"
+    value="SELECT"
+    class="select-btn">
+        SELECT
+    </button>
+    <button type="submit"
+name="action"
+value="CREATE"
+class="create-btn">
+    CREATE TABLE
+</button>
+
+</div>
+
+    </form>
+
+    <div class="output">
+
+        <h2>Generated Query</h2>
+
+        <textarea readonly>{{ query }}</textarea>
+        <button onclick="copyQuery()" type="button">
+    Copy Query
+</button>
+<a id="downloadLink" download="query.sql">
+    <button type="button" onclick="downloadQuery()">
+        Download SQL
+    </button>
+</a>
+
+    </div>
+<div class="history">
+
+    <h2>Recent Queries</h2>
+
+    {% for q in history %}
+
+        <textarea readonly>{{ q }}</textarea>
+
+    {% endfor %}
+
+</div>
+    <footer>
+        Made By Saud Alam
+    </footer>
+
+</div>
+<script>
+
+function copyQuery(){
+
+    let text =
+    document.querySelector(".output textarea");
+
+    text.select();
+
+    document.execCommand("copy");
+
+    alert("Query Copied!");
+
+}
+
+</script>
+<script>
+
+function downloadQuery(){
+
+    let text =
+    document.querySelector(".output textarea").value;
+
+    let blob =
+    new Blob([text], { type: "text/sql" });
+
+    let link =
+    document.getElementById("downloadLink");
+
+    link.href =
+    URL.createObjectURL(blob);
+
+}
+
+</script>
+<script>
+
+function copyQuery(){
+
+    let text =
+    document.querySelector(".output textarea");
+
+    text.select();
+
+    document.execCommand("copy");
+
+    alert("Query Copied!");
+
+}
+
+</script>
+<script>
+
+function copyQuery(){
+
+    let text =
+    document.querySelector(".output textarea");
+
+    text.select();
+
+    document.execCommand("copy");
+
+    alert("Query Copied!");
+}
+
+function toggleTheme(){
+
+    document.body.classList.toggle("light-mode");
+
+}
+
+</script>
+</body>
+<button class="theme-btn"
+onclick="toggleTheme()">
+    🌙 Dark Mode
+</button>
+</html>
